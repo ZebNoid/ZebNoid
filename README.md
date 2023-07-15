@@ -4,8 +4,10 @@
 
 ---
 
-| <div align=center><img src="https://raw.githubusercontent.com/ZebNoid/ZebNoid/main/assets/logo.svg" width="400" height="400" alt="logo"></div> |
+<div align=center>
+| <img src="https://raw.githubusercontent.com/ZebNoid/ZebNoid/main/assets/logo.svg" width="400" height="400" alt="logo"> |
 | ------- |
+</div>
 
 <!--
 **ZebNoid/ZebNoid** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
