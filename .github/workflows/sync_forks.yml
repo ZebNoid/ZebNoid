@@ -49,8 +49,3 @@ jobs:
           upstream_branch: ${{ matrix.branch }}
           target_branch: ${{ matrix.branch }}
           tags: true
-      # - name: Test
-      #   run: |
-      #     echo ZebNoid/${{ matrix.repo }}
-      #     echo ${{ matrix.upstream }}
-      #     echo ${{ matrix.branch }}
