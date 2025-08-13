@@ -1,0 +1,55 @@
+name: Sync Forks
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' #every Sunday
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+
+jobs:
+  sync_matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: 
+          - SRE-binwalk
+          - SRE-jadx
+          - SRE-ghidra
+          - SRE-CyberChef
+          - SRE-john
+        include:
+          - repo: SRE-binwalk
+            upstream: ReFirmLabs/binwalk
+            branch: master
+          - repo: SRE-jadx
+            upstream: skylot/jadx
+            branch: master
+          - repo: SRE-ghidra
+            upstream: NationalSecurityAgency/ghidra
+            branch: master
+          - repo: SRE-CyberChef
+            upstream: gchq/CyberChef
+            branch: master
+          - repo: SRE-john
+            upstream: openwall/john
+            branch: bleeding-jumbo
+
+    steps:
+      # - name: Forks Sync
+      #   uses: TobKed/github-forks-sync-action@master
+      #   with:
+      #     github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+      #     upstream_repository: ${{ matrix.upstream }}
+      #     target_repository: ZebNoid/${{ matrix.repo }}
+      #     upstream_branch: ${{ matrix.branch }}
+      #     target_branch: ${{ matrix.branch }}
+      #     tags: true
+      - name: Test
+        run: |
+          echo ZebNoid/${{ matrix.repo }}
+          echo ${{ matrix.upstream }}
+          echo ${{ matrix.branch }}
