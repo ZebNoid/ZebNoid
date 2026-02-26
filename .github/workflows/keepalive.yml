@@ -1,0 +1,15 @@
+name: Workflow Keepalive
+
+on:
+  schedule:
+    # - cron: '0 0 * * *'  # Run daily at midnight UTC
+    - cron: '0 0 * * 0' #every Sunday
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Keep workflows alive
+        uses: liskin/gh-workflow-keepalive@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
