@@ -17,33 +17,20 @@ jobs:
       run: |
         echo ok
 
-    - name: Step fail 1
-      run: exit 1
-    - name: Step fail 2
-      run: exit 1
-      # continue-on-error: true # Allows subsequent steps to run
+    # - name: Step fail 1
+    #   run: exit 1
+    # - name: Step fail 2
+    #   run: exit 1
+    #   # continue-on-error: true # Allows subsequent steps to run
 
     - name: Step ok
       run: |
         echo ${{ github.repository }}
         echo ok
 
-    - name: Get failed jobs
-      if: always()
-      run: |
-        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs | jq '.jobs[] | select(.conclusion == "failure") | .name' | echo
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-    - name: Get failed jobs 2
-      if: always()
-      run: |
-        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs --jq '.jobs[] | select(.conclusion == "failure") | .name, .head_branch, (.steps[]|select(.conclusion == "failure")|.name)'
-        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs --jq '.jobs[] | select(.conclusion == "failure") | .name' | echo
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Tg Release failed
+      id: tg_failed
       if: ${{ failure() }}
       uses: appleboy/telegram-action@master
       with:
@@ -53,6 +40,7 @@ jobs:
           🔴 Android ${{ steps.version_tag.outputs.VERSION }} release failed
 
     - name: Tg Release
+      id: tg_success
       if: ${{ success() }}
       uses: appleboy/telegram-action@master
       with:
@@ -60,6 +48,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
+          >> ${{ github.repository }}
     
     - name: Step ok2
       run: |
