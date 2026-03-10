@@ -50,7 +50,7 @@ jobs:
         message: |
           🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
 
-          > [https://github.com/${{ github.repository }}/blob/main/README.md](README.md)
+          [README.md](https://github.com/${{ github.repository }}/blob/main/README.md)
     
     - name: Step ok2
       run: |
