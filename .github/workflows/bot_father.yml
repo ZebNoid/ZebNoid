@@ -25,6 +25,7 @@ jobs:
 
     - name: Step ok
       run: |
+        echo ${{ github.repository }}
         echo ok
 
     - name: Get failed jobs
@@ -42,14 +43,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Tg Build failed
+    - name: Tg Release failed
       if: ${{ failure() }}
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          🔴 Android ${{ steps.version_tag.outputs.VERSION }} build failed
+          🔴 Android ${{ steps.version_tag.outputs.VERSION }} release failed
 
     - name: Tg Release
       if: ${{ success() }}
