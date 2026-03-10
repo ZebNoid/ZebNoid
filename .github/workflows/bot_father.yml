@@ -17,8 +17,8 @@ jobs:
       run: |
         echo ok
 
-    - name: Step fail 1
-      run: exit 1
+    # - name: Step fail 1
+    #   run: exit 1
     # - name: Step fail 2
     #   run: exit 1
     #   # continue-on-error: true # Allows subsequent steps to run
@@ -40,7 +40,7 @@ jobs:
         message: |
           🔴 Android ${{ steps.version_tag.outputs.VERSION }} release failed
 
-          [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          [Failed Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
     - name: Tg Release
       id: tg_success
