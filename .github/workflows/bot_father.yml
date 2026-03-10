@@ -15,8 +15,8 @@ jobs:
         message: |
           Send message from ${{ github.repository }}.
     
-    - name: Step that might fail
-      run: exit 1
+    # - name: Step that might fail
+    #   run: exit 1
       # continue-on-error: true # Allows subsequent steps to run
 
     - name: Step ok
@@ -30,7 +30,16 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          🔴 Android build failed ${{ github.repository }} ${GITHUB_REF_NAME#v}.
+          🔴 Android build failed ${GITHUB_REF_NAME} ${{ github.ref_name }}
+
+    - name: failure message
+      if: ${{ success() }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          🟢 Android success ${GITHUB_REF_NAME} ${{ github.ref_name }}
     
     - name: Step ok2
       run: |
