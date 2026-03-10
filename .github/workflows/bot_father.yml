@@ -48,7 +48,8 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
-          >> ${{ github.repository }}
+
+          >> [https://github.com/${{ github.repository }}/README.md](README.md)
     
     - name: Step ok2
       run: |
