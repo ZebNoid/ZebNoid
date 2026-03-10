@@ -30,8 +30,15 @@ jobs:
     - name: Get failed jobs
       if: always()
       run: |
-        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs \
-          | jq '.jobs[] | select(.conclusion == "failure") | .name'
+        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs | jq '.jobs[] | select(.conclusion == "failure") | .name'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Get failed jobs 2
+      if: always()
+      run: |
+        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs --jq '.jobs[] | select(.conclusion == "failure") | .name, .head_branch, (.steps[]|select(.conclusion == "failure")|.name)'
+        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs --jq '.jobs[] | select(.conclusion == "failure") | .name'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
