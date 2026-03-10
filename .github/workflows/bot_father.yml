@@ -7,9 +7,6 @@ jobs:
   telegram:
     runs-on: ubuntu-latest
     steps:    
-    # - name: Step that might fail
-    #   run: exit 1
-      # continue-on-error: true # Allows subsequent steps to run
     - name: Version Tag
       id: version_tag
       run: |
@@ -20,6 +17,24 @@ jobs:
       run: |
         echo ok
 
+    - name: Step fail 1
+      run: exit 1
+    - name: Step fail 2
+      run: exit 1
+      # continue-on-error: true # Allows subsequent steps to run
+
+    - name: Step ok
+      run: |
+        echo ok
+
+    - name: Get failed jobs
+      if: always()
+      run: |
+        gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs \
+          | jq '.jobs[] | select(.conclusion == "failure") | .name'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: failure message
       if: ${{ failure() }}
       uses: appleboy/telegram-action@master
@@ -27,7 +42,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          🔴 Android ${{ steps.version_tag.outputs.VERSION }} build failed ${{ github.ref_name }}
+          🔴 Android ${{ steps.version_tag.outputs.VERSION }} build failed
 
     - name: failure message
       if: ${{ success() }}
@@ -36,7 +51,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          🟢 Android ${{ steps.version_tag.outputs.VERSION }} release ${{ github.ref_name }}
+          🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
     
     - name: Step ok2
       run: |
