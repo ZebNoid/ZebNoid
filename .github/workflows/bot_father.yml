@@ -36,10 +36,11 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         format: markdown
+        disable_web_page_preview: true
         message: |
           🔴 Android ${{ steps.version_tag.outputs.VERSION }} release failed
 
-          > [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
     - name: Tg Release
       id: tg_success
@@ -49,10 +50,11 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         format: markdown
+        disable_web_page_preview: true
         message: |
           🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
 
-          > [README.md](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/README.md)
+          [README.md](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/README.md)
     
     - name: Step ok2
       run: |
