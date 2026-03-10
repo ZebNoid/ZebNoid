@@ -17,8 +17,8 @@ jobs:
       run: |
         echo ok
 
-    # - name: Step fail 1
-    #   run: exit 1
+    - name: Step fail 1
+      run: exit 1
     # - name: Step fail 2
     #   run: exit 1
     #   # continue-on-error: true # Allows subsequent steps to run
@@ -28,7 +28,6 @@ jobs:
         echo ${{ github.repository }}
         echo ok
 
-
     - name: Tg Release failed
       id: tg_failed
       if: ${{ failure() }}
@@ -36,8 +35,11 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
         message: |
           🔴 Android ${{ steps.version_tag.outputs.VERSION }} release failed
+
+          > [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
     - name: Tg Release
       id: tg_success
@@ -51,8 +53,6 @@ jobs:
           🟢 Android ${{ steps.version_tag.outputs.VERSION }} release
 
           > [README.md](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/README.md)
-
-          > [Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
     
     - name: Step ok2
       run: |
