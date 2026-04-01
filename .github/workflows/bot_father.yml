@@ -28,6 +28,10 @@ jobs:
         echo ${{ github.repository }}
         echo ok
 
+
+    - name: Checkout
+      uses: actions/checkout@v6
+
     - name: Tg Release failed
       continue-on-error: true
       id: tg_failed
