@@ -26,6 +26,7 @@ runs:
   using: "composite"
   steps:
     - name: Send message
+      shell: bash
       run: |
         curl -X POST \
           -H 'Content-Type: application/json' \
