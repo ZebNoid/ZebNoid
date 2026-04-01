@@ -4,15 +4,12 @@ inputs:
   to:
     description: 'Chat id'
     required: true
-    default: ''
   token:
     description: 'tg token'
     required: true
-    default: ''
   message:
     description: 'tg message'
     required: true
-    default: ''
   disable_web_page_preview:
     description: 'disable web preview'
     required: false
@@ -30,7 +27,7 @@ runs:
       run: |
         curl -X POST \
           -H 'Content-Type: application/json' \
-          -d '{"chat_id": "${{ inputs.to }}", "no_webpage": ${{ inputs.disable_web_page_preview }}, "parse_mode": "${{ inputs.format }}", "text": "${{ inputs.message }}"}' \
+          -d '{"chat_id": "${{ inputs.to }}", "disable_web_page_preview": ${{ inputs.disable_web_page_preview }}, "parse_mode": "${{ inputs.format }}", "text": "${{ inputs.message }}"}' \
           https://api.telegram.org/bot${{ inputs.token }}/sendMessage
 
 
