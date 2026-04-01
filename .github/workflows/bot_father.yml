@@ -29,9 +29,11 @@ jobs:
         echo ok
 
     - name: Tg Release failed
+      continue-on-error: true
       id: tg_failed
       if: ${{ failure() }}
-      uses: appleboy/telegram-action@master
+      # uses: appleboy/telegram-action@master
+      uses: ./.github/actions/tg
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -43,9 +45,11 @@ jobs:
           [Failed Github Action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
     - name: Tg Release
+      continue-on-error: true
       id: tg_success
       if: ${{ success() }}
-      uses: appleboy/telegram-action@master
+      # uses: appleboy/telegram-action@master
+      uses: ./.github/actions/tg
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}

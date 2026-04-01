@@ -1,0 +1,35 @@
+name: 'Telegram message'
+description: 'Send message someone'
+inputs:
+  to:
+    description: 'Chat id'
+    required: true
+    default: ''
+  token:
+    description: 'tg token'
+    required: true
+    default: ''
+  message:
+    description: 'tg message'
+    required: true
+    default: ''
+  disable_web_page_preview:
+    description: 'disable web preview'
+    required: false
+    default: true
+  format:
+    description: 'message format'
+    required: false
+    default: 'MarkdownV2'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Send message
+      run: |
+        curl -X POST \
+          -H 'Content-Type: application/json' \
+          -d '{"chat_id": "${{ inputs.id }}", "no_webpage": ${{ inputs.disable_web_page_preview }}, "parse_mode": "${{ inputs.format }}", "text": "${{ inputs.message }}"}' \
+          https://api.telegram.org/bot${{ inputs.token }}/sendMessage
+
+
