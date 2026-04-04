@@ -17,7 +17,7 @@ inputs:
   format:
     description: 'message format'
     required: false
-    default: 'MarkdownV2'
+    default: 'markdown'
 
 runs:
   using: "composite"
