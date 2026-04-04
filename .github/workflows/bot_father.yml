@@ -33,13 +33,13 @@ jobs:
       uses: actions/checkout@v6
 
       
-    - name: NPM Token
-      run: |
-        npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+    # - name: NPM Token
+    #   run: |
+    #     npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
 
-    - name: NPM Token Check
-      run: |
-        npm whoami
+    # - name: NPM Token Check
+    #   run: |
+    #     npm whoami
 
     - name: Tg Release failed
       continue-on-error: true
