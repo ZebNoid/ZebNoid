@@ -18,6 +18,7 @@ jobs:
       matrix:
         repo: 
           - SRE-binwalk
+          - SRE-binwalk-ng
           - SRE-jadx
           - SRE-ghidra
           - SRE-CyberChef
@@ -26,6 +27,9 @@ jobs:
           - repo: SRE-binwalk
             upstream: ReFirmLabs/binwalk
             branch: master
+          - repo: SRE-binwalk-ng
+            upstream: binwalk-ng/binwalk-ng
+            branch: main
           - repo: SRE-jadx
             upstream: skylot/jadx
             branch: master
