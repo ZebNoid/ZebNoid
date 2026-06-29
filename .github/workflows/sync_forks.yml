@@ -51,9 +51,10 @@ jobs:
       - name: Forks Sync
         uses: TobKed/github-forks-sync-action@master
         with:
-          github_token: ${{ secrets.GH_SYNC_FORK_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           upstream_repository: ${{ matrix.upstream }}
           target_repository: ZebNoid/${{ matrix.repo }}
           upstream_branch: ${{ matrix.branch }}
           target_branch: ${{ matrix.branch }}
+          force: true
           tags: true
