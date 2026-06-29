@@ -24,10 +24,13 @@ jobs:
           - SRE-CyberChef
           - SRE-john
         include:
-          - repo: SRE-binwalk
-            upstream: ReFirmLabs/binwalk
+          - repo: Wand-Enhancer
+            upstream: k1tbyte/Wand-Enhancer
             branch: master
-          - repo: SRE-binwalk-ng
+          # - repo: SRE-binwalk
+          #   upstream: ReFirmLabs/binwalk
+          #   branch: master
+          - repo: SRE-binwalk
             upstream: binwalk-ng/binwalk-ng
             branch: main
           - repo: SRE-jadx
