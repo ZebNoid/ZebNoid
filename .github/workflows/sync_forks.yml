@@ -30,7 +30,7 @@ jobs:
           # - repo: SRE-binwalk
           #   upstream: ReFirmLabs/binwalk
           #   branch: master
-          - repo: SRE-binwalk
+          - repo: SRE-binwalk-ng
             upstream: binwalk-ng/binwalk-ng
             branch: main
           - repo: SRE-jadx
