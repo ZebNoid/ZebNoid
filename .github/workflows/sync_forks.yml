@@ -17,7 +17,8 @@ jobs:
       fail-fast: false
       matrix:
         repo: 
-          - SRE-binwalk
+          - Wand-Enhancer
+          # - SRE-binwalk
           - SRE-binwalk-ng
           - SRE-jadx
           - SRE-ghidra
